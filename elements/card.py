@@ -1,11 +1,17 @@
-
+#
+# Class representing a single card
+#
 class Card:
     def __init__(self, value, suit):
-        self.value = CardValue(value)
+        self._value = CardValue(value)
         self.suit = Suit(suit)
 
+    @property
+    def value(self):
+        return self._value.value
+
     def __unicode__(self):
-        return unicode(self.value) + unicode(self.suit)
+        return unicode(self._value) + unicode(self.suit)
 
     def __str__(self):
         return unicode(self).encode('utf-8')
@@ -14,7 +20,9 @@ class Card:
         return (self.value == other.value) and \
                (self.suit == other.suit)
 
-
+#
+# Class defining legal card values and how to represent them
+#
 class CardValue:
     MAXCARDVALUE = 13
     MINCARDVALUE = 1
@@ -34,6 +42,10 @@ class CardValue:
 
     def __eq__(self, other):
         return self.value == other.value
+
+#
+# Class defining legal suits and their colors, as well as representations
+#
 
 class Suit:
     suites = ['hearts', 'diamonds', 'spades', 'clubs']
