@@ -122,3 +122,21 @@ class AceStack(Stack):
         suitcrit = card.suit == self.suit
 
         return True if valuecrit and suitcrit else False
+
+
+#
+# Same suit stack but doesn't have to start with an ace.
+# Will be used for trash + small piles
+#
+class SuitStack(Stack):
+    def __init__(self):
+        super(SuitStack, self).__init__()
+
+    def _legal(self, card):
+        if self.empty:
+            return True
+        else:
+            topcard = self.cards[-1]
+            valuecrit = card.value == topcard.value + 1
+            suitcrit = card.suit == topcard.suit
+            return True if valuecrit and suitcrit else False
